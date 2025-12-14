@@ -170,7 +170,11 @@ def top_categories(
     return result
 
 
-def compute_quality_flags(summary: DatasetSummary, missing_df: pd.DataFrame) -> Dict[str, Any]:
+def compute_quality_flags(
+        summary: DatasetSummary, 
+        missing_df: pd.DataFrame, 
+        df: pd.DataFrame
+        ) -> Dict[str, Any]:
     """
     Простейшие эвристики «качества» данных:
     - слишком много пропусков;
@@ -184,6 +188,28 @@ def compute_quality_flags(summary: DatasetSummary, missing_df: pd.DataFrame) -> 
     max_missing_share = float(missing_df["missing_share"].max()) if not missing_df.empty else 0.0
     flags["max_missing_share"] = max_missing_share
     flags["too_many_missing"] = max_missing_share > 0.5
+    
+    #проверка на колонки с одинаковыми значениями
+    constant_columns = [name for name in df.columns if df[name].notna().sum()>0 and len(df[name].dropna().unique())==1]
+    flags["has_constant_columns"] = len(constant_columns) > 0
+
+    #проверка на нулевые значения в числовых колонках
+    zero_threshold: float = 0.5
+    many_zero_columns = []
+    for name in df.columns:
+        col = df[name]
+        if ptypes.is_numeric_dtype(col) and col.notna().sum() > 0:
+            zero_count = (col == 0).sum()
+            total_non_null = col.notna().sum()
+            if total_non_null > 0:
+                zero_share = zero_count / total_non_null
+                if zero_share > zero_threshold:
+                    many_zero_columns.append({
+                        "column": name,
+                        "zero_count": int(zero_count),
+                        "zero_share": float(zero_share)
+                    })
+    flags["has_many_zero_values"] = len(many_zero_columns) > 0
 
     # Простейший «скор» качества
     score = 1.0
@@ -192,7 +218,12 @@ def compute_quality_flags(summary: DatasetSummary, missing_df: pd.DataFrame) -> 
         score -= 0.2
     if summary.n_cols > 100:
         score -= 0.1
+    if flags["has_constant_columns"]:
+        score -= 0.1
+    if flags["has_many_zero_values"]:
+        score -= 0.1
 
+        
     score = max(0.0, min(1.0, score))
     flags["quality_score"] = score
 

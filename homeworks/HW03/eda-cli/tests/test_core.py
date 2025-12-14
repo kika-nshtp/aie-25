@@ -17,7 +17,7 @@ def _sample_df() -> pd.DataFrame:
         {
             "age": [10, 20, 30, None],
             "height": [140, 150, 160, 170],
-            "city": ["A", "B", "A", None],
+            "city": ["A", "B", "A", None]
         }
     )
 
@@ -44,7 +44,7 @@ def test_missing_table_and_quality_flags():
     assert missing_df.loc["age", "missing_count"] == 1
 
     summary = summarize_dataset(df)
-    flags = compute_quality_flags(summary, missing_df)
+    flags = compute_quality_flags(summary, missing_df, df)
     assert 0.0 <= flags["quality_score"] <= 1.0
 
 
@@ -59,3 +59,12 @@ def test_correlation_and_top_categories():
     city_table = top_cats["city"]
     assert "value" in city_table.columns
     assert len(city_table) <= 2
+
+def test_has_constant_columns_flag():
+    df = pd.DataFrame({
+        "age": [10,10,10,10],
+        "grad": [4,5,3,4],
+        "school": ["A","B","A","C"]
+        })
+    quality_flags = compute_quality_flags(summarize_dataset(df),missing_table(df),df)
+    assert quality_flags['has_constant_columns']==True

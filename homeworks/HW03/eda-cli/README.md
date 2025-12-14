@@ -41,6 +41,13 @@ uv run eda-cli overview data/example.csv
 uv run eda-cli report data/example.csv --out-dir reports
 ```
 
+Параметры:
+- `--out_dir` - каталог для отчёта (по умолчанию `reports`);
+- `--sep` – разделитель (по умолчанию `,`);
+- `--encoding` – кодировка (по умолчанию `utf-8`);
+- `--max_hist_columns` - максимум числовых колонок для гистограмм (по умолчанию `6`);
+- `--title` - заголовок отчёта (по умолчанию `Title`).
+
 В результате в каталоге `reports/` появятся:
 
 - `report.md` – основной отчёт в Markdown;
