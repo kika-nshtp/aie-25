@@ -67,7 +67,8 @@ def report(
     sep: str = typer.Option(",", help="Разделитель в CSV."),
     encoding: str = typer.Option("utf-8", help="Кодировка файла."),
     max_hist_columns: int = typer.Option(6, help="Максимум числовых колонок для гистограмм."),
-    title: str = typer.Option("Title", help = "Заголовок отчёта.")
+    title: str = typer.Option("Title", help = "Заголовок отчёта."),
+    top_k_categories: int = typer.Option(5, help="Сколько top-значений выводить для категориальных признаков.")
 ) -> None:
     """
     Сгенерировать полный EDA-отчёт:
@@ -87,7 +88,7 @@ def report(
     summary_df = flatten_summary_for_print(summary)
     missing_df = missing_table(df)
     corr_df = correlation_matrix(df)
-    top_cats = top_categories(df)
+    top_cats = top_categories(df, top_k = top_k_categories)
 
     # 2. Качество в целом
     quality_flags = compute_quality_flags(summary, missing_df, df)
@@ -106,6 +107,10 @@ def report(
         f.write(f"# {title}\n\n")
         f.write(f"Исходный файл: `{Path(path).name}`\n\n")
         f.write(f"Строк: **{summary.n_rows}**, столбцов: **{summary.n_cols}**\n\n")
+
+        f.write("## Параметры анализа\n\n")
+        f.write(f"- Top значений для категорий: **{top_k_categories}**\n")
+        f.write(f"- Макс. кол-во гистограмм: **{max_hist_columns}**\n\n")
 
         f.write("## Качество данных (эвристики)\n\n")
         f.write(f"- Оценка качества: **{quality_flags['quality_score']:.2f}**\n")
@@ -136,7 +141,7 @@ def report(
         if not top_cats:
             f.write("Категориальные/строковые признаки не найдены.\n\n")
         else:
-            f.write("См. файлы в папке `top_categories/`.\n\n")
+            f.write("Показаны top-{top_k_categories} значений для категориальных признаков\n\n")
 
         f.write("## Гистограммы числовых колонок\n\n")
         f.write("См. файлы `hist_*.png`.\n")
@@ -150,7 +155,7 @@ def report(
     typer.echo(f"- Основной markdown: {md_path}")
     typer.echo("- Табличные файлы: summary.csv, missing.csv, correlation.csv, top_categories/*.csv")
     typer.echo("- Графики: hist_*.png, missing_matrix.png, correlation_heatmap.png")
-
+    typer.echo(f"- Top значений для категорий: {top_k_categories}")
 
 if __name__ == "__main__":
     app()
