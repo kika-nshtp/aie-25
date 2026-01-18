@@ -1,0 +1,53 @@
+{
+  "results": [
+    {
+      "algo": "kmeans",
+      "params": {"k": 2},
+      "n_clusters": 2,
+      "metrics": {
+      "silhouette": 0.522,
+      "davies_bouldin": 0.685,
+      "calinski_harabasz": 11787.0,
+      "inertia": 48425.9
+      },
+      "dataset": "S07-hw-dataset-01.csv"
+    },
+    {
+      "algo": "dbscan",
+      "params": {"eps": 2.0, "min_samples": 3},
+      "n_clusters": 2,
+      "metrics": {
+      "noise_frac": 0.0,
+      "non_noise": 12000,
+      "silhouette": 0.522,
+      "davies_bouldin": 0.685,
+      "calinski_harabasz": 11787.0
+      },
+      "dataset": "S07-hw-dataset-01.csv"
+    },
+    {
+      "algo": "kmeans",
+      "params": {"k": 2},
+      "n_clusters": 2,
+      "metrics": {
+      "silhouette": 0.307,
+      "davies_bouldin": 1.323,
+      "calinski_harabasz": 3573,
+      "inertia": 16588.5
+      },
+      "dataset": "S07-hw-dataset-02.csv"
+    },
+    {
+      "algo": "kmeans",
+      "params": {"k": 3},
+      "n_clusters": 3,
+      "metrics": {
+        "silhouette": 0.316,
+        "davies_bouldin": 1.158,
+        "calinski_harabasz": 6957.2,
+        "inertia": 31123.5
+      },
+      "dataset": "S07-hw-dataset-03.csv"
+    }
+  ]
+}
