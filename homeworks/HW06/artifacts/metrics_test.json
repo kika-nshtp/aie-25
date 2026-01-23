@@ -1,40 +1,34 @@
 {
-  "results": [
-    {
+  "results": {
+    "HistGradientBoosting": {
       "accuracy": 0.9363333333333334,
       "f1": 0.8982418753329782,
-      "roc_auc": 0.9746823421867858,
-      "model": "HistGradientBoosting"
+      "roc_auc": 0.9746823421867858
     },
-    {
+    "Stacking": {
       "accuracy": 0.9386666666666666,
       "f1": 0.9031578947368422,
-      "roc_auc": 0.9745452237062617,
-      "model": "Stacking"
+      "roc_auc": 0.9745452237062617
     },
-    {
+    "RandomForest": {
       "accuracy": 0.9346666666666666,
       "f1": 0.8942826321467098,
-      "roc_auc": 0.97060992331522,
-      "model": "RandomForest"
+      "roc_auc": 0.97060992331522
     },
-    {
+    "DecisionTree": {
       "accuracy": 0.8633333333333333,
       "f1": 0.7848898216159497,
-      "roc_auc": 0.9105332385353713,
-      "model": "DecisionTree"
+      "roc_auc": 0.9105332385353713
     },
-    {
+    "LogReg(scaled)": {
       "accuracy": 0.8296666666666667,
       "f1": 0.7146845337800112,
-      "roc_auc": 0.878905083540704,
-      "model": "LogReg(scaled)"
+      "roc_auc": 0.878905083540704
     },
-    {
+    "Dummy(most_frequent)": {
       "accuracy": 0.6766666666666666,
       "f1": 0.0,
-      "roc_auc": 0.5,
-      "model": "Dummy(most_frequent)"
+      "roc_auc": 0.5
     }
-  ]
+  }
 }
