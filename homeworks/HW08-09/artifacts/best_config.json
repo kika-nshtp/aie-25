@@ -1,0 +1,14 @@
+{
+  "experiment_id" : "E4",
+  "dataset" : "EMNIST",
+  "seed" : 42,
+  "hidden_dims" : [256,128],
+  "dropout_p" : 0,
+  "optimizer" : "Adam",
+  "lr" : 0.001,
+  "momentum" : 0,
+  "weight_decay" : 0,
+  "epochs_trained" : 11,
+  "best_val_accuracy" : 0.8459,
+  "best_val_loss" : 0.4865
+}
