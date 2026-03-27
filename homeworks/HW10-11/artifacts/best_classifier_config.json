@@ -1,0 +1,24 @@
+{
+  "experiment_id": "C4",
+  "dataset": "STL10",
+  "num_classes": 10,
+  "architecture": "SimpleCNN",
+  "seed": 42,
+  "batch_size": 64,
+  "loss": "CrossEntropyLoss",
+  "optimizer": "Adam",
+  "best_val_accuracy": 0.955,
+  "test_accuracy": 0.9519,
+  "img_size": 96,
+  "normalize_mean": [
+    0.4467,
+    0.4398,
+    0.4066
+  ],
+  "normalize_std": [
+    0.2603,
+    0.2566,
+    0.2713
+  ],
+  "augmentations": "None"
+}
