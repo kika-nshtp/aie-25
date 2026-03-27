@@ -1,0 +1,19 @@
+{
+  "model": "GRUForecaster",
+  "input_size": 1,
+  "hidden_size": 64,
+  "num_layers": 2,
+  "dropout": 0.0,
+  "window_size": 24,
+  "horizon": 1,
+  "batch_size": 64,
+  "lr": 0.0005,
+  "epochs": 30,
+  "seed": 42,
+  "scaler": "StandardScaler",
+  "scaler_mean": 128.20576058201058,
+  "scaler_std": 18.48154222978581,
+  "optimizer": "Adam",
+  "criterion": "MSELoss",
+  "dataset": "S12-hw-dataset.csv"
+}

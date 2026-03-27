@@ -1,0 +1,5 @@
+experiment_id,task,dataset,seed,split_summary,window_size,horizon,model_summary,features_summary,scaler,optimizer,lr,epochs_trained,best_val_mae,best_val_rmse,best_val_mape,test_mae,test_rmse,test_mape,notes
+B1,forecasting,S12-hw-dataset.csv,42,"train:70%/3024, val:15%/648, test:15%/648",,1,naive-last (lag_1),lag_1,,,,,6.3967,8.1757,4.3612,6.3561,8.0945,4.1631,forecast=last observed value
+B2,forecasting,S12-hw-dataset.csv,42,"train:70%/3024, val:15%/648, test:15%/648",24,1,moving-average(24h),rolling_mean_24,,,,,13.3494,16.1508,9.1718,13.1444,16.1279,8.7493,rolling mean 24h
+B3,forecasting,S12-hw-dataset.csv,42,"train:70%/3024, val:15%/648, test:15%/648",,1,Ridge(alpha=1.0),lag_1/7/14/24/168+rolling+calendar,StandardScaler,,,,4.4075,5.6988,2.9657,4.3407,5.643,2.811,Ridge on lag/rolling/calendar features
+R1,forecasting,S12-hw-dataset.csv,42,"train:70%/3024, val:15%/648, test:15%/648",24,1,"GRU(hidden=64,layers=2)",scaled target sequence,StandardScaler,Adam,0.0005,30,5.7918,7.4076,3.8733,6.6992,8.4897,4.2695,GRU forecaster window=24h best state by val_loss
