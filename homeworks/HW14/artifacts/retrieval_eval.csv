@@ -1,4 +1,4 @@
-query_id,query,expected_source,retrieved_sources,hit_at_3,recall_at_3,MRR_at_3,rank_of_first_relevant
+query_id,query,expected_source,retrieved_sources,hit_at_k,recall_at_k,MRR_at_k,rank_of_first_relevant
 q01,Какая планета самая большая в Солнечной системе?,doc_05,"doc_05, doc_05, doc_08",1,1.0,1.0,1
 q02,Самая горячая планета Солнечной системы?,doc_02,"doc_02, doc_02, doc_10",1,1.0,1.0,1
 q03,Какой спутник является единственным у Земли?,doc_09,"doc_09, doc_03, doc_07",1,1.0,1.0,1
